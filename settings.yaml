@@ -1,0 +1,93 @@
+---
+processorlib: /home/boydb1/dax-processors
+modulelib: /home/boydb1/dax-modules
+singularity_imagedir: /scratch/boydb1/SINGULARITY_IMAGES
+attrs:
+  priority_project:
+  queue_limit: 125
+  job_email: brian.d.boyd@vanderbilt.edu
+  job_email_options: FAIL
+  xnat_host: http://xnat2.vanderbilt.edu:8080/xnat
+  skip_lastupdate: Y
+modules:
+  - name: d2n
+    filepath: Module_dcm2niix.py
+    arguments:
+      dcm2niixpath: /scratch/boydb1/apps/dcm2niix_1jan2017/console/dcm2niix
+  - name: limbo2xnat
+    filepath: Module_edat_limbo2xnat.py
+yamlprocessors:
+  - name: ashs2
+    filepath: ASHS_v2.0.3_processor.yaml
+  - name: lst1
+    filepath: LST_v1.1.0_processor.yaml
+  - name: bag
+    filepath: BrainAgeGap_v1.0.0_processor.yaml
+  - name: ma
+    filepath: Multi_Atlas_v2.1.0_processor.yaml
+  - name: fmriqa
+    filepath: fMRIQA_v4.0.0_processor.yaml
+  - name: fs6
+    filepath: FS6_v1.0.0_processor.yaml
+  - name: dtiqa
+    filepath: dtiQA_v6.0.0_processor.yaml
+  - name: edatqa_edp
+    filepath: EDATQA_v1.0.6_processor.yaml
+    arguments:
+      inputs.defaults.resp_column: Probe_RESP,Probe1_RESP,Probe2_RESP,Probe3_RESP,Probe4_RESP
+      inputs.defaults.type_column: Type
+      inputs.defaults.rt_column: Probe_RT,Probe1_RT,Probe2_RT,Probe3_RT,Probe4_RT
+      inputs.defaults.acc_column: Probe_ACC,Probe1_ACC,Probe2_ACC,Probe3_ACC,Probe4_ACC
+      inputs.xnat.scans.scan1.types: fMRI_EDP
+  - name: edatqa_nback
+    filepath: EDATQA_v1.0.6_processor.yaml
+    arguments:
+      inputs.defaults.resp_column: StimText_RESP
+      inputs.defaults.type_column: Nbackcondition
+      inputs.defaults.rt_column: StimText_RT
+      inputs.defaults.acc_column: StimText_ACC
+      inputs.xnat.scans.scan1.types: fMRI_NBack,NBack_fMRI
+  - name: rsfc
+    filepath: RSFC_CONN_v1.0.1_processor.yaml
+  - name: rwml
+    filepath: RWML_v1.0.0_processor.yaml
+  - name: tlobe
+    filepath: Temporal_Lobe_v3.1.0_processor.yaml
+  - name: fmriqa3
+    filepath: fMRIQA_v3.0.3_processor.yaml
+  - name: ma_GNB
+    filepath: Multi_Atlas_v2.1.0_processor.yaml
+    arguments:
+      inputs.xnat.scans.scan1.types: T1avg
+  - name: bag_GNB
+    filepath: BrainAgeGap_v1.0.0_processor.yaml
+    arguments:
+      inputs.xnat.scans.scan1.types: T1avg
+projects:
+  - project: GNB
+    yamlprocessors: bag_GNB,ma_GNB
+  - project: GNB_V
+    yamlprocessors: bag,dtiqa,fmriqa,fs6,lst1,ma,rsfc,rwml
+  - project: LesionPilot
+    yamlprocessors: bag
+  - project: NewhouseMDDHx
+    yamlprocessors: bag,fmriqa,fs6,lst1,ma,rsfc,tlobe
+  - project: NIC
+    yamlprocessors: ashs2,dtiqa,edatqa_nback,fs6,lst1,ma,rsfc,rwml,tlobe
+    modules: d2n,limbo2xnat
+  - project: NIC_phantom
+    modules: d2n
+    yamlprocessors: ashs2,dtiqa,edatqa_nback,fmriqa,fmriqa3,fs6,lst1,ma  
+  - project: R21Perfusion
+    yamlprocessors: bag
+  - project: SCD_Mec
+    yamlprocessors: bag,fmriqa,fs6,lst1,ma,rsfc,tlobe
+    modules: d2n
+  - project: TAYLOR
+    modules: d2n
+    yamlprocessors: ashs2,bag,dtiqa,fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml
+  - project: TAYLOR_DepMIND
+    yamlprocessors: bag,fs6,lst1,ma,rsfc,rwml,tlobe
+  - project: TAYLOR_CAARE
+    modules: d2n,limbo2xnat
+    yamlprocessors: bag,dtiqa,edatqa_edp,fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml
