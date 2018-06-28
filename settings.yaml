@@ -16,6 +16,20 @@ modules:
       dcm2niixpath: /scratch/boydb1/apps/dcm2niix_1jan2017/console/dcm2niix
   - name: limbo2xnat
     filepath: Module_edat_limbo2xnat.py
+  - name: aa
+    filepath: Module_Auto_Archive.py
+    arguments: 
+      email: brian.d.boyd@vanderbilt.edu
+      api_key: API_KEY_CAARE
+      arc_proj_filter: TAYLOR_CAARE
+      pre_proj_filter: TAYLOR
+      rc_subj_field: study_ident
+      rc_subj_event: screen_arm_1
+      rc_sess_field: mri_sesnid
+      rc_sess_event: baseline_arm_1,phase1_8wk_arm_1
+      rc_vuiis_field: mri_id
+      rc_date_field: mri_date
+      rc_proj_field: mri_xnat
 yamlprocessors:
   - name: ashs2
     filepath: ASHS_v2.0.3_processor.yaml
@@ -89,5 +103,5 @@ projects:
   - project: TAYLOR_DepMIND
     yamlprocessors: bag,fs6,lst1,ma,rsfc,rwml,tlobe
   - project: TAYLOR_CAARE
-    modules: d2n,limbo2xnat
+    modules: d2n,limbo2xnat,aa
     yamlprocessors: bag,dtiqa,edatqa_edp,fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml
