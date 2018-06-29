@@ -3,7 +3,7 @@ processorlib: /home/boydb1/dax-processors
 modulelib: /home/boydb1/dax-modules
 singularity_imagedir: /scratch/boydb1/SINGULARITY_IMAGES
 attrs:
-  priority_project:
+  priority_project: TAYLOR_CAARE
   queue_limit: 125
   job_email: brian.d.boyd@vanderbilt.edu
   job_email_options: FAIL
