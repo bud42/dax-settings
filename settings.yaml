@@ -77,6 +77,8 @@ yamlprocessors:
     filepath: BrainAgeGap_v1.0.0_processor.yaml
     arguments:
       inputs.xnat.scans.scan1.types: T1avg
+  - name: tracula
+    filepath: TRACULA_v2.0.0_processor.yaml
 projects:
   - project: GNB
     yamlprocessors: bag_GNB,ma_GNB
