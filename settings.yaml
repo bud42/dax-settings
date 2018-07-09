@@ -83,7 +83,7 @@ projects:
   - project: GNB
     yamlprocessors: bag_GNB,ma_GNB
   - project: GNB_V
-    yamlprocessors: bag,dtiqa,fmriqa,fs6,lst1,ma,rsfc,rwml
+    yamlprocessors: bag,dtiqa,fmriqa,fs6,lst1,ma,rsfc,rwml,tracula
   - project: LesionPilot
     yamlprocessors: bag
   - project: NewhouseMDDHx
@@ -106,4 +106,4 @@ projects:
     yamlprocessors: bag,fs6,lst1,ma,rsfc,rwml,tlobe
   - project: TAYLOR_CAARE
     modules: d2n,limbo2xnat,aa
-    yamlprocessors: bag,dtiqa,edatqa_edp,fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml
+    yamlprocessors: bag,dtiqa,edatqa_edp,fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml,tracula
