@@ -89,7 +89,7 @@ projects:
   - project: NewhouseMDDHx
     yamlprocessors: bag,fmriqa,fs6,lst1,ma,rsfc,tlobe
   - project: NIC
-    yamlprocessors: ashs2,dtiqa,edatqa_nback,fs6,lst1,ma,rsfc,rwml,tlobe
+    yamlprocessors: ashs2,dtiqa,edatqa_nback,fs6,lst1,ma,rsfc,rwml,tlobe,fmriqa,fmriqa3
     modules: d2n,limbo2xnat
   - project: NIC_phantom
     modules: d2n
