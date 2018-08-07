@@ -79,6 +79,10 @@ yamlprocessors:
       inputs.xnat.scans.scan1.types: T1avg
   - name: tracula
     filepath: TRACULA_v2.0.0_processor.yaml
+  - name: fs6_CONTE
+    filepath: FS6_v1.1.0_processor.yaml
+    arguments:
+      inputs.xnat.scans.scan1.types: axT1
 projects:
   - project: GNB
     yamlprocessors: bag_GNB,ma_GNB
@@ -107,3 +111,10 @@ projects:
   - project: TAYLOR_CAARE
     modules: d2n,limbo2xnat,aa
     yamlprocessors: bag,dtiqa,edatqa_edp,fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml,tracula
+  - project: CONTE
+    modules: d2n
+    yamlprocessors: fs6_CONTE
+  - project: ACOBA 
+    modules: d2n,limbo2xnat,aa
+    yamlprocessors: fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml
+
