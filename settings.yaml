@@ -115,6 +115,6 @@ projects:
     modules: d2n
     yamlprocessors: fs6_CONTE
   - project: ACOBA 
-    modules: d2n,limbo2xnat,aa
+    modules: d2n,limbo2xnat
     yamlprocessors: fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml
 
