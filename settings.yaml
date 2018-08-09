@@ -42,7 +42,7 @@ yamlprocessors:
   - name: fmriqa
     filepath: fMRIQA_v4.0.0_processor.yaml
   - name: fs6
-    filepath: FS6_v1.0.0_processor.yaml
+    filepath: FS6_v1.1.0_processor.yaml
   - name: dtiqa
     filepath: dtiQA_v6.0.0_processor.yaml
   - name: edatqa_edp
@@ -97,7 +97,7 @@ projects:
     modules: d2n,limbo2xnat
   - project: NIC_phantom
     modules: d2n
-    yamlprocessors: ashs2,dtiqa,edatqa_nback,fmriqa,fmriqa3,fs6,lst1,ma  
+    yamlprocessors: rsfc,ashs2,dtiqa,edatqa_nback,fmriqa,fmriqa3,fs6,lst1,ma  
   - project: R21Perfusion
     yamlprocessors: bag
   - project: SCD_Mec
