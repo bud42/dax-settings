@@ -42,7 +42,9 @@ yamlprocessors:
   - name: fmriqa
     filepath: fMRIQA_v4.0.0_processor.yaml
   - name: fs6
-    filepath: FS6_v1.1.0_processor.yaml
+    filepath: FS6_v1.2.0_processor.yaml
+    arguments:
+      inputs.defaults.extraflags: '\-3T'
   - name: dtiqa
     filepath: dtiQA_v6.0.0_processor.yaml
   - name: edatqa_edp
