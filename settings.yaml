@@ -69,8 +69,8 @@ yamlprocessors:
     filepath: RWML_v1.0.0_processor.yaml
   - name: tlobe
     filepath: Temporal_Lobe_v3.1.0_processor.yaml
-  - name: fmriqa3
-    filepath: fMRIQA_v3.0.3_processor.yaml
+#  - name: fmriqa3
+#    filepath: fMRIQA_v3.0.3_processor.yaml
   - name: ma_GNB
     filepath: Multi_Atlas_v2.1.0_processor.yaml
     arguments:
@@ -86,37 +86,36 @@ yamlprocessors:
     arguments:
       inputs.xnat.scans.scan1.types: axT1
 projects:
-  - project: GNB
-    yamlprocessors: bag_GNB,ma_GNB
-  - project: GNB_V
-    yamlprocessors: bag,dtiqa,fmriqa,fs6,lst1,ma,rsfc,rwml,tracula
-  - project: LesionPilot
-    yamlprocessors: bag
-  - project: NewhouseMDDHx
-    yamlprocessors: bag,fmriqa,fs6,lst1,ma,rsfc,tlobe
-  - project: NIC
-    yamlprocessors: ashs2,dtiqa,edatqa_nback,fs6,lst1,ma,rsfc,rwml,tlobe,fmriqa,fmriqa3
-    modules: d2n,limbo2xnat
-  - project: NIC_phantom
-    modules: d2n
-    yamlprocessors: rsfc,ashs2,dtiqa,edatqa_nback,fmriqa,fmriqa3,fs6,lst1,ma  
-  - project: R21Perfusion
-    yamlprocessors: bag
+#  - project: GNB
+#    yamlprocessors: bag_GNB,ma_GNB
+#  - project: GNB_V
+#    yamlprocessors: bag,dtiqa,fmriqa,fs6,lst1,ma,rsfc,rwml,tracula
+#  - project: LesionPilot
+#    yamlprocessors: bag
+#  - project: NewhouseMDDHx
+#    yamlprocessors: bag,fmriqa,fs6,lst1,ma,rsfc,tlobe
+#  - project: R21Perfusion
+#    yamlprocessors: bag
+#  - project: TAYLOR
+#    modules: d2n
+#    yamlprocessors: ashs2,bag,dtiqa,fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml
+#  - project: TAYLOR_DepMIND
+#    yamlprocessors: bag,fs6,lst1,ma,rsfc,rwml,tlobe
+#  - project: CONTE
+#    modules: d2n
+#    yamlprocessors: fs6_CONTE
   - project: SCD_Mec
     yamlprocessors: bag,fmriqa,fs6,lst1,ma,rsfc,tlobe
     modules: d2n
-  - project: TAYLOR
-    modules: d2n
-    yamlprocessors: ashs2,bag,dtiqa,fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml
-  - project: TAYLOR_DepMIND
-    yamlprocessors: bag,fs6,lst1,ma,rsfc,rwml,tlobe
   - project: TAYLOR_CAARE
     modules: d2n,limbo2xnat,aa
-    yamlprocessors: bag,dtiqa,edatqa_edp,fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml,tracula
-  - project: CONTE
+    yamlprocessors: bag,dtiqa,edatqa_edp,fmriqa,fs6,lst1,ma,rsfc,rwml,tracula
+  - project: NIC
+    yamlprocessors: ashs2,dtiqa,edatqa_nback,fs6,lst1,ma,rsfc,rwml,tlobe,fmriqa
+    modules: d2n,limbo2xnat
+  - project: NIC_phantom
     modules: d2n
-    yamlprocessors: fs6_CONTE
+    yamlprocessors: rsfc,ashs2,dtiqa,edatqa_nback,fmriqa,fs6,lst1,ma  
   - project: ACOBA 
     modules: d2n,limbo2xnat
-    yamlprocessors: fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml
-
+    yamlprocessors: fmriqa,fs6,lst1,ma,rsfc,rwml
