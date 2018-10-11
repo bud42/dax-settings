@@ -4,7 +4,7 @@ modulelib: /home/boydb1/dax-modules
 singularity_imagedir: /scratch/boydb1/SINGULARITY_IMAGES
 attrs:
   priority_project: TAYLOR_CAARE
-  queue_limit: 125
+  queue_limit: 100
   job_email: brian.d.boyd@vanderbilt.edu
   job_email_options: FAIL
   xnat_host: http://xnat2.vanderbilt.edu:8080/xnat
@@ -31,12 +31,8 @@ modules:
       rc_date_field: mri_date
       rc_proj_field: mri_xnat
 yamlprocessors:
-  - name: ashs2
-    filepath: ASHS_v2.0.3_processor.yaml
   - name: lst1
     filepath: LST_v1.1.0_processor.yaml
-  - name: bag
-    filepath: BrainAgeGap_v1.0.0_processor.yaml
   - name: ma
     filepath: Multi_Atlas_v2.1.0_processor.yaml
   - name: fmriqa
@@ -44,7 +40,6 @@ yamlprocessors:
   - name: fs6
     filepath: FS6_v1.2.0_processor.yaml
     arguments:
-    #inputs.defaults.extraflags: '\-3T'
   - name: dtiqa
     filepath: dtiQA_v6.0.0_processor.yaml
   - name: edatqa_edp
@@ -69,53 +64,22 @@ yamlprocessors:
     filepath: RWML_v1.0.0_processor.yaml
   - name: tlobe
     filepath: Temporal_Lobe_v3.1.0_processor.yaml
-#  - name: fmriqa3
-#    filepath: fMRIQA_v3.0.3_processor.yaml
-  - name: ma_GNB
-    filepath: Multi_Atlas_v2.1.0_processor.yaml
-    arguments:
-      inputs.xnat.scans.scan1.types: T1avg
-  - name: bag_GNB
-    filepath: BrainAgeGap_v1.0.0_processor.yaml
-    arguments:
-      inputs.xnat.scans.scan1.types: T1avg
   - name: tracula
     filepath: TRACULA_v2.0.0_processor.yaml
-  - name: fs6_CONTE
-    filepath: FS6_v1.1.0_processor.yaml
-    arguments:
-      inputs.xnat.scans.scan1.types: axT1
 projects:
-#  - project: GNB
-#    yamlprocessors: bag_GNB,ma_GNB
-#  - project: GNB_V
-#    yamlprocessors: bag,dtiqa,fmriqa,fs6,lst1,ma,rsfc,rwml,tracula
-#  - project: LesionPilot
-#    yamlprocessors: bag
-#  - project: NewhouseMDDHx
-#    yamlprocessors: bag,fmriqa,fs6,lst1,ma,rsfc,tlobe
-#  - project: R21Perfusion
-#    yamlprocessors: bag
-#  - project: TAYLOR
-#    modules: d2n
-#    yamlprocessors: ashs2,bag,dtiqa,fmriqa,fmriqa3,fs6,lst1,ma,rsfc,rwml
-#  - project: TAYLOR_DepMIND
-#    yamlprocessors: bag,fs6,lst1,ma,rsfc,rwml,tlobe
-#  - project: CONTE
-#    modules: d2n
-#    yamlprocessors: fs6_CONTE
   - project: SCD_Mec
-    yamlprocessors: bag,fmriqa,fs6,lst1,ma,rsfc,tlobe
+    yamlprocessors: fmriqa,fs6,lst1,ma,rsfc,tlobe
     modules: d2n
   - project: TAYLOR_CAARE
     modules: d2n,limbo2xnat,aa
-    yamlprocessors: bag,dtiqa,edatqa_edp,fmriqa,fs6,lst1,ma,rsfc,rwml,tracula
+    yamlprocessors: dtiqa,edatqa_edp,fmriqa,fs6,lst1,ma,rsfc,rwml,tracula
   - project: NIC
-    yamlprocessors: ashs2,dtiqa,edatqa_nback,fs6,lst1,ma,rsfc,rwml,tlobe,fmriqa
+    yamlprocessors: dtiqa,edatqa_nback,fs6,lst1,ma,rsfc,rwml,tlobe,fmriqa
     modules: d2n,limbo2xnat
   - project: NIC_phantom
     modules: d2n
-    yamlprocessors: rsfc,ashs2,dtiqa,edatqa_nback,fmriqa,fs6,lst1,ma  
+    yamlprocessors: rsfc,dtiqa,edatqa_nback,fmriqa,fs6,lst1,ma  
   - project: ACOBA 
     modules: d2n,limbo2xnat
     yamlprocessors: fmriqa,fs6,lst1,ma,rsfc,rwml
+
