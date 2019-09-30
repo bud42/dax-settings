@@ -1,0 +1,16 @@
+---
+processorlib: /home/boydb1/dax-processors
+modulelib: /home/boydb1/dax-modules
+singularity_imagedir: /scratch/boydb1/SINGULARITY_IMAGES
+attrs:
+  priority_project: TAYLOR_CAARE
+  queue_limit: 200
+  job_email: brian.d.boyd@vumc.org
+  job_email_options: FAIL
+  xnat_host: http://xnat2.vanderbilt.edu:8080/xnat
+yamlprocessors:
+  - name: amyvid
+    filepath: AMYVIDQA_v1.0.0_processor.yaml
+projects:
+  - project: TAYLOR_CAARE
+    yamlprocessors: amyvid
