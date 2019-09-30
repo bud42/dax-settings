@@ -5,7 +5,7 @@ singularity_imagedir: /scratch/boydb1/SINGULARITY_IMAGES
 attrs:
   priority_project: TAYLOR_CAARE
   queue_limit: 200
-  job_email: brian.d.boyd@vanderbilt.edu
+  job_email: brian.d.boyd@vumc.org
   job_email_options: FAIL
   xnat_host: http://xnat2.vanderbilt.edu:8080/xnat
 modules:
