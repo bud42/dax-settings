@@ -4,11 +4,10 @@ modulelib: /home/boydb1/dax-modules
 singularity_imagedir: /scratch/boydb1/SINGULARITY_IMAGES
 attrs:
   priority_project: TAYLOR_CAARE
-  queue_limit: 100
+  queue_limit: 200
   job_email: brian.d.boyd@vanderbilt.edu
   job_email_options: FAIL
   xnat_host: http://xnat2.vanderbilt.edu:8080/xnat
-  skip_lastupdate: Y
 modules:
   - name: d2n
     filepath: Module_dcm2niix.py
@@ -24,13 +23,15 @@ modules:
       arc_proj_filter: TAYLOR_CAARE
       pre_proj_filter: TAYLOR
       rc_subj_field: study_ident
-      rc_subj_event: screen_arm_1
+      rc_subj_event: screen_arm_1,screen_arm_2
       rc_sess_field: mri_sesnid
-      rc_sess_event: baseline_arm_1,phase1_8wk_arm_1
+      rc_sess_event: baseline_arm_1,baseline_arm_2,phase1_8wk_arm_1
       rc_vuiis_field: mri_id
       rc_date_field: mri_date
       rc_proj_field: mri_xnat
 yamlprocessors:
+  - name: bag
+    filepath: BrainAgeGap_v2.0.0_processor.yaml
   - name: lst1
     filepath: LST_v1.1.0_processor.yaml
   - name: ma
@@ -38,8 +39,9 @@ yamlprocessors:
   - name: fmriqa
     filepath: fMRIQA_v4.0.0_processor.yaml
   - name: fs6
-    filepath: FS6_v1.2.0_processor.yaml
+    filepath: FS6_v1.2.3_processor.yaml
     arguments:
+      inputs.xnat.scans.scan_t1.types: T1,MPRAGE
   - name: dtiqa
     filepath: dtiQA_v6.0.0_processor.yaml
   - name: edatqa_edp
@@ -49,7 +51,7 @@ yamlprocessors:
       inputs.defaults.type_column: Type
       inputs.defaults.rt_column: Probe_RT,Probe1_RT,Probe2_RT,Probe3_RT,Probe4_RT
       inputs.defaults.acc_column: Probe_ACC,Probe1_ACC,Probe2_ACC,Probe3_ACC,Probe4_ACC
-      inputs.xnat.scans.scan1.types: fMRI_EDP
+      inputs.xnat.scans.scan_fmri.types: fMRI_EDP
   - name: edatqa_nback
     filepath: EDATQA_v1.0.6_processor.yaml
     arguments:
@@ -57,29 +59,61 @@ yamlprocessors:
       inputs.defaults.type_column: Nbackcondition
       inputs.defaults.rt_column: StimText_RT
       inputs.defaults.acc_column: StimText_ACC
-      inputs.xnat.scans.scan1.types: fMRI_NBack,NBack_fMRI
+      inputs.xnat.scans.scan_fmri.types: fMRI_NBack,NBack_fMRI
   - name: rsfc
     filepath: RSFC_CONN_v1.0.1_processor.yaml
   - name: rwml
-    filepath: RWML_v1.0.0_processor.yaml
+    filepath: RWML_v1.0.1_processor.yaml
   - name: tlobe
     filepath: Temporal_Lobe_v3.1.0_processor.yaml
   - name: tracula
     filepath: TRACULA_v2.0.0_processor.yaml
+  - name: bedp 
+    filepath: bedpostx_v3.0.0_processor.yaml
+  - name: ashs
+    filepath: ASHS_v1.2.0_processor.yaml
+  - name: macruise
+    filepath: macruise_v3.2.0_processor.yaml
+  - name: curve_extract
+    filepath: curve_extract_v1.1.0_processor.yaml
+  - name: surf_postproc
+    filepath: surf_postproc_v1.1.0_processor.yaml
+  - name: surf_quant_stat
+    filepath: surf_quant_stat_v1.1.0_processor.yaml
+  - name: surf_quant
+    filepath: surf_quant_v1.1.0_processor.yaml
 projects:
   - project: SCD_Mec
-    yamlprocessors: fmriqa,fs6,lst1,ma,rsfc,tlobe
+    yamlprocessors: fmriqa,fs6,lst1,ma,rsfc
     modules: d2n
   - project: TAYLOR_CAARE
-    modules: d2n,limbo2xnat,aa
-    yamlprocessors: dtiqa,edatqa_edp,fmriqa,fs6,lst1,ma,rsfc,rwml,tracula
+    modules: aa,d2n,limbo2xnat
+    yamlprocessors: bag,bedp,dtiqa,edatqa_edp,fmriqa,fs6,lst1,ma,macruise,rsfc,rwml,tracula,curve_extract,surf_postproc,surf_quant_stat,surf_quant
   - project: NIC
-    yamlprocessors: dtiqa,edatqa_nback,fs6,lst1,ma,rsfc,rwml,tlobe,fmriqa
-    modules: d2n,limbo2xnat
+    yamlprocessors: ashs,dtiqa,edatqa_nback,fs6,lst1,ma,rsfc,rwml,fmriqa
+    modules: d2n
   - project: NIC_phantom
     modules: d2n
-    yamlprocessors: rsfc,dtiqa,edatqa_nback,fmriqa,fs6,lst1,ma  
+    yamlprocessors: ashs,rsfc,dtiqa,edatqa_nback,fmriqa,fs6,lst1,ma  
   - project: ACOBA 
     modules: d2n,limbo2xnat
     yamlprocessors: fmriqa,fs6,lst1,ma,rsfc,rwml
-
+  - project: NewhouseCC
+    yamlprocessors: ma
+  - project: ALBERT
+    modules: d2n
+    yamlprocessors: fmriqa,fs6,lst1,ma,rsfc
+  - project: NewhouseMDDHx
+    modules: d2n
+    yamlprocessors: fs6,lst1
+  - project: CHANGES
+    modules: d2n
+    yamlprocessors: fs6,lst1,fmriqa,rsfc,ma
+  - project: TAYLOR_DepMIND
+    yamlprocessors: fs6,macruise
+  - project: R21Perfusion
+    yamlprocessors: fs6
+  - project: LesionPilot
+    yamlprocessors: fs6
+  - project: DUMAS_PMW
+    yamlprocessors: fs6
